@@ -1,7 +1,7 @@
 <h1>Movie #<%= @movie.id %></h1>
 
 <p>
-  User Rating: <%= ("&#9733;" * @movie.average_rating + "&#9734;" * (10 - @movie.average_rating)).html_safe %>
+  User Rating: <%= ("&#9733;" * @movie.average_rating.to_i + "&#9734;" * (10 - @movie.average_rating.to_i)).html_safe %>
   based on
   <%= link_to "#{pluralize(@movie.reviews.count, 'review')}", '#reviews' %>
 </p>
@@ -22,6 +22,16 @@
 </p>
 
 <p>Directed By: <%= @movie.director.name %>, born <%= @movie.director.dob %></p>
+
+<h2 id='roles'>Roles:</h2>
+<%= link_to 'Add a role for this movie', new_role_url(movie_id: @movie.id) %>
+<% @movie.roles.each do |role| %>
+  <% if role.present? %>
+  <p><%= link_to role.actor.name, actor_url(role.actor.id) %> plays <%= link_to role.name, role_url(role.id) %></p>
+  <% else %>
+  <p>No roles have been submitted for this movie so far.</p>
+  <% end %>
+<% end %>
 
 <h2 id="reviews">Reviews</h2>
 <p><%= link_to "Write a Review", new_review_url(movie_id: @movie.id) %></p>

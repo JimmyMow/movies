@@ -1,0 +1,33 @@
+<h1>New Role</h1>
+
+
+<%= form_tag(roles_url, method: 'post') do %>
+
+<% if @actor == nil %>
+  <div>
+    <%= label_tag :actor_id %><br />
+    <%= select_tag "actor_id", options_from_collection_for_select(@actors, "id", "name") %>
+  </div>
+
+<%= hidden_field_tag 'movie_id', @movie.id %>
+
+<% elsif @movie == nil %>
+
+  <div>
+      <%= label_tag :movie_id %><br />
+      <%= select_tag "movie_id", options_from_collection_for_select(@movies, "id", "title") %>
+    </div>
+
+  <%= hidden_field_tag 'actor_id', @actor.id %>
+<% end %>
+
+  <div>
+    <%= label_tag :name %><br />
+    <%= text_field_tag :name %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Create Role" %>
+  </div>
+<% end %>

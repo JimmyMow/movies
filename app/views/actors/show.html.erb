@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <b>Image url:</b>
-  <%= @actor.image_url %>
+  <b></b>
+  <%= image_tag(@actor.image_url) %>
 </p>
 
 <p>
@@ -19,5 +19,13 @@
   <b>Bio:</b>
   <%= @actor.bio %>
 </p>
+
+<div>
+<b>Roles:</b>
+<p><%= link_to 'Add a role for this actor', new_role_url(:actor_id => @actor.id) %></p>
+<% @actor.roles.each do |role| %>
+  <p><%= role.name %> in <%= role.movie.title %></p>
+<% end %>
+</div>
 
 

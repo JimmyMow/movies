@@ -12,4 +12,6 @@ class Movie < ActiveRecord::Base
     Director.find_by(id: self.director_id)
   end
 
+  has_many :roles
+
 end
